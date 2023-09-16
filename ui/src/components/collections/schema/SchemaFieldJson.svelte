@@ -1,5 +1,6 @@
 <script>
     import { slide } from "svelte/transition";
+        import Field from "@/components/base/Field.svelte";
     import SchemaField from "@/components/collections/schema/SchemaField.svelte";
 
     export let field;
@@ -24,7 +25,6 @@
                 <i class="ri-arrow-down-s-line txt-sm" />
             {/if}
         </button>
-
         {#if showInfo}
             <div class="block" transition:slide={{ duration: 150 }}>
                 <div class="alert alert-warning m-b-0 m-t-10">
@@ -52,5 +52,16 @@
                 </div>
             </div>
         {/if}
+        <div class="col-sm-6">
+            <Field class="form-field" name="schema.{key}.options.JsonSchema" let:uniqueId>
+                <label for={uniqueId}>JSON schema</label>
+                <input
+                    type="text"
+                    id={uniqueId}
+                    placeholder={"Valid JSON schema up to the latest specification (Draft 2020-12)"}
+                    bind:value={field.options.JsonSchema}
+                />
+            </Field>
+        </div>
     </svelte:fragment>
 </SchemaField>
